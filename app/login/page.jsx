@@ -1,14 +1,22 @@
 "use client";
 import Link from "next/link";
 import createSession from "../actions/createSession";
-import { useFormState } from "react-dom";
-import { useEffect } from "react";
+// import { useFormState } from "react-dom";
+import { useActionState, useEffect } from "react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 function LoginPage() {
-  const [state, formAction] = useFormState(createSession, {});
+  const [state, formAction] = useActionState(createSession, {});
+  const router = useRouter();
 
-useEffect(()=>)
-
+  useEffect(() => {
+    if (state.error) toast.error(state.error);
+    if (state.success) {
+      toast.success("Logged in Successfully");
+      router.push("/");
+    }
+  }, [state]);
 
   return (
     <div className="flex items-center justify-center">
@@ -30,6 +38,7 @@ useEffect(()=>)
               id="email"
               name="email"
               className="border rounded w-full py-2 px-3"
+              required
             />
           </div>
 
@@ -45,6 +54,7 @@ useEffect(()=>)
               id="password"
               name="password"
               className="border rounded w-full py-2 px-3"
+              required
             />
           </div>
 

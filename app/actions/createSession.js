@@ -1,4 +1,6 @@
 "use server";
+import { createAdminClient } from "@/config/appwrite";
+import { cookies } from "next/headers";
 
 export default async function createSession(previousState, formData) {
   const email = formData.get("email");
@@ -8,6 +10,37 @@ export default async function createSession(previousState, formData) {
     return { error: "Please fill out all fields" };
   }
 
-  console.log("🚀 ~ createSession ~ email:", email);
-  console.log("🚀 ~ createSession ~ password:", password);
+  // Get account instance
+  const { account } = await createAdminClient();
+  try {
+    // Generate session
+    const session = await account.createEmailPasswordSession(email, password);
+
+    // Create Cookie
+
+    const cookieStore = await cookies();
+    cookieStore.set("appwrite-session", session.secret, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      expires: new Date(session.expire),
+      path: "/",
+    });
+
+    return {
+      success: true,
+    };
+  } catch (error) {
+    console.error("Authentication Error:", {
+      name: error?.name,
+      message: error?.message,
+      code: error?.code,
+      type: error?.type,
+      response: error?.response,
+    });
+
+    return {
+      error: "Invalid Crefentials",
+    };
+  }
 }
