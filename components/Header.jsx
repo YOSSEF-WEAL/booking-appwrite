@@ -1,9 +1,29 @@
+"use client";
+
+import destroySession from "@/app/actions/destroySession";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { FaBuilding, FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
 import logo from "@/assets/images/logo.svg";
-
+import { toast } from "react-toastify";
+import checkAuth from "@/app/actions/checkAuth";
+import { useAuth } from "@/context/authContext";
 function Header() {
+  const router = useRouter();
+  const { isAuthenticated, setIsAuthenticated } = useAuth();
+
+  const handleLogout = async () => {
+    const { success, error } = await destroySession();
+
+    if (success) {
+      setIsAuthenticated(false);
+      router.push("login");
+    } else {
+      toast.error(error);
+    }
+  };
+
   return (
     <header className="bg-gray-100">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -25,44 +45,58 @@ function Header() {
                 >
                   Rooms
                 </Link>
-                <Link
-                  href="/bookings"
-                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
-                >
-                  Bookings
-                </Link>
-                <Link
-                  href="/add-room"
-                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
-                >
-                  Add Room
-                </Link>
+                {isAuthenticated && (
+                  <>
+                    <Link
+                      href="/bookings"
+                      className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                    >
+                      Bookings
+                    </Link>
+                    <Link
+                      href="/add-room"
+                      className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                    >
+                      Add Room
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>
           <div className="ml-auto">
             <div className="ml-4 flex items-center md:ml-6">
-              <Link
-                href="/login"
-                className="mr-3 text-gray-800 hover:text-gray-600"
-              >
-                <FaSignInAlt className="inline align-text-bottom" /> Login
-              </Link>
-              <Link
-                href="/register"
-                className="mr-3 text-gray-800 hover:text-gray-600"
-              >
-                <FaUser className="inline align-text-bottom" /> Register
-              </Link>
-              <Link href="my-rooms.html">
-                <FaBuilding className="inline align-text-bottom" /> My Rooms
-              </Link>
-              <Link
-                href="login.html"
-                className="mx-3 text-gray-800 hover:text-gray-600"
-              >
-                <FaSignOutAlt className="inline align-text-bottom" /> Sign Out
-              </Link>
+              {!isAuthenticated && (
+                <>
+                  <Link
+                    href="/login"
+                    className="mr-3 text-gray-800 hover:text-gray-600"
+                  >
+                    <FaSignInAlt className="inline align-text-bottom" /> Login
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="mr-3 text-gray-800 hover:text-gray-600"
+                  >
+                    <FaUser className="inline align-text-bottom" /> Register
+                  </Link>
+                </>
+              )}
+
+              {isAuthenticated && (
+                <>
+                  <Link href="my-rooms.html">
+                    <FaBuilding className="inline align-text-bottom" /> My Rooms
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="mx-3 text-gray-800 hover:text-gray-600"
+                  >
+                    <FaSignOutAlt className="inline align-text-bottom" /> Sign
+                    Out
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -70,24 +104,28 @@ function Header() {
 
       <div className="md:hidden">
         <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-          <Link
-            href="/"
-            className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
-          >
-            Rooms
-          </Link>
-          <Link
-            href="/bookings.html"
-            className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
-          >
-            Bookings
-          </Link>
-          <Link
-            href="/add-room.html"
-            className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
-          >
-            Add Room
-          </Link>
+          {isAuthenticated && (
+            <>
+              <Link
+                href="/"
+                className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+              >
+                Rooms
+              </Link>
+              <Link
+                href="/bookings.html"
+                className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+              >
+                Bookings
+              </Link>
+              <Link
+                href="/add-room"
+                className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+              >
+                Add Room
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>
