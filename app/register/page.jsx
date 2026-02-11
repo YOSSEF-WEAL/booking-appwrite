@@ -1,8 +1,27 @@
+"use client";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import createUser from "@/app/actions/createUser";
+import Link from "next/link";
+
 function RegisterPage() {
+  const [state, formAction] = React.useActionState(createUser, {});
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.error) toast.error(state.error);
+    if (state.success) {
+      toast.success("You can now log in!");
+
+      router.push("/login");
+    }
+  }, [state]);
+
   return (
     <div className="flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-sm mt-20">
-        <form>
+        <form action={formAction}>
           <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
             Register
           </h2>
@@ -19,6 +38,7 @@ function RegisterPage() {
               id="name"
               name="name"
               className="border rounded w-full py-2 px-3"
+              autoComplete="name"
               required
             />
           </div>
@@ -35,6 +55,7 @@ function RegisterPage() {
               id="email"
               name="email"
               className="border rounded w-full py-2 px-3"
+              autoComplete="email"
               required
             />
           </div>
@@ -52,6 +73,7 @@ function RegisterPage() {
               name="password"
               className="border rounded w-full py-2 px-3"
               required
+              autoComplete="password"
             />
           </div>
 
@@ -67,6 +89,7 @@ function RegisterPage() {
               id="confirm-password"
               name="confirm-password"
               className="border rounded w-full py-2 px-3"
+              autoComplete="confirm-password"
               required
             />
           </div>
@@ -81,13 +104,13 @@ function RegisterPage() {
 
             <p>
               Have an account?
-              <a href="login.html" className="text-blue-500">
+              <Link href="/login" className="text-blue-500">
                 Login
-              </a>
+              </Link>
             </p>
           </div>
         </form>
-      </div>
+      </div>{" "}
     </div>
   );
 }
