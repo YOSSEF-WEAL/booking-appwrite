@@ -38,7 +38,7 @@ export default async function (previousState, formData) {
   } catch (error) {
     console.error("Registration Error: ", error);
     return {
-      error: "Password do not match",
+      error: "Could not register user",
     };
   }
 }
