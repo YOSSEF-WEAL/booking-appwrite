@@ -42,21 +42,21 @@ export default async function RoomPage({ params }) {
 
             <ul className="space-y-2">
               <li>
-                <span className="font-semibold text-gray-800">Size:</span>{" "}
+                <span className="font-semibold text-gray-800">Size: </span>{" "}
                 {room.sqft}
               </li>
               <li>
-                <span className="font-semibold text-gray-800">
+                <span className="font-semibold text-gray-800 mr-2">
                   Availability:
                 </span>
                 {room.availability}
               </li>
               <li>
-                <span className="font-semibold text-gray-800">Price:</span>$
+                <span className="font-semibold text-gray-800">Price: </span>$
                 {room.price_per_hour}/hour
               </li>
               <li>
-                <span className="font-semibold text-gray-800">Address:</span>{" "}
+                <span className="font-semibold text-gray-800">Address: </span>{" "}
                 {room.address}
               </li>
             </ul>
