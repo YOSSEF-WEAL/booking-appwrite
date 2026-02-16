@@ -11,7 +11,7 @@ export default async function Home() {
       {rooms.length > 0 ? (
         rooms.map((room) => <RoomCard key={room.$id} room={room} />)
       ) : (
-        <p>No rooms available at the moment</p>
+        <p className="text-zinc-400">No rooms available at the moment</p>
       )}
     </>
   );

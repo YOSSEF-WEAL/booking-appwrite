@@ -25,7 +25,7 @@ function Header() {
   };
 
   return (
-    <header className="bg-gray-100">
+    <header className="bg-zinc-900 border-b border-zinc-800">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
@@ -41,7 +41,7 @@ function Header() {
               <div className="ml-10 flex items-baseline space-x-4">
                 <Link
                   href="/"
-                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                  className="rounded-md px-3 py-2 text-sm font-medium text-zinc-100 hover:bg-zinc-800"
                 >
                   Rooms
                 </Link>
@@ -49,13 +49,13 @@ function Header() {
                   <>
                     <Link
                       href="/bookings"
-                      className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                      className="rounded-md px-3 py-2 text-sm font-medium text-zinc-100 hover:bg-zinc-800"
                     >
                       Bookings
                     </Link>
                     <Link
                       href="/rooms/add"
-                      className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                      className="rounded-md px-3 py-2 text-sm font-medium text-zinc-100 hover:bg-zinc-800"
                     >
                       Add Room
                     </Link>
@@ -70,13 +70,13 @@ function Header() {
                 <>
                   <Link
                     href="/login"
-                    className="mr-3 text-gray-800 hover:text-gray-600"
+                    className="mr-3 text-zinc-100 hover:text-zinc-300"
                   >
                     <FaSignInAlt className="inline align-text-bottom" /> Login
                   </Link>
                   <Link
                     href="/register"
-                    className="mr-3 text-gray-800 hover:text-gray-600"
+                    className="mr-3 text-zinc-100 hover:text-zinc-300"
                   >
                     <FaUser className="inline align-text-bottom" /> Register
                   </Link>
@@ -85,12 +85,12 @@ function Header() {
 
               {isAuthenticated && (
                 <>
-                  <Link href="/rooms/my">
+                  <Link href="/rooms/my" className="text-zinc-100 hover:text-zinc-300">
                     <FaBuilding className="inline align-text-bottom" /> My Rooms
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="mx-3 text-gray-800 hover:text-gray-600"
+                    className="mx-3 text-zinc-100 hover:text-zinc-300"
                   >
                     <FaSignOutAlt className="inline align-text-bottom" /> Sign
                     Out
@@ -108,19 +108,19 @@ function Header() {
             <>
               <Link
                 href="/"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                className="block rounded-md px-3 py-2 text-base font-medium text-zinc-100 hover:bg-zinc-800"
               >
                 Rooms
               </Link>
               <Link
                 href="/bookings"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                className="block rounded-md px-3 py-2 text-base font-medium text-zinc-100 hover:bg-zinc-800"
               >
                 Bookings
               </Link>
               <Link
                 href="/add-room"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                className="block rounded-md px-3 py-2 text-base font-medium text-zinc-100 hover:bg-zinc-800"
               >
                 Add Room
               </Link>

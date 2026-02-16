@@ -26,10 +26,10 @@ export default async function RoomPage({ params }) {
   return (
     <>
       <Heading title={room.name} />
-      <div className="bg-white shadow rounded-lg p-6">
+      <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-6 shadow">
         <Link
           href="/"
-          className="flex items-center text-gray-600 hover:text-gray-800 mb-4"
+          className="mb-4 flex items-center text-zinc-400 hover:text-zinc-200"
         >
           <FaChevronLeft className="inline mr-1" />
           <span className="ml-2">Back to Rooms</span>
@@ -45,25 +45,25 @@ export default async function RoomPage({ params }) {
           />
 
           <div className="mt-4 sm:mt-0 sm:flex-1">
-            <p className="text-gray-600 mb-4">{room.description}</p>
+            <p className="mb-4 text-zinc-400">{room.description}</p>
 
             <ul className="space-y-2">
               <li>
-                <span className="font-semibold text-gray-800">Size: </span>{" "}
+                <span className="font-semibold text-zinc-200">Size: </span>{" "}
                 {room.sqft}
               </li>
               <li>
-                <span className="font-semibold text-gray-800 mr-2">
+                <span className="mr-2 font-semibold text-zinc-200">
                   Availability:
                 </span>
                 {room.availability}
               </li>
               <li>
-                <span className="font-semibold text-gray-800">Price: </span>$
+                <span className="font-semibold text-zinc-200">Price: </span>$
                 {room.price_per_hour}/hour
               </li>
               <li>
-                <span className="font-semibold text-gray-800">Address: </span>{" "}
+                <span className="font-semibold text-zinc-200">Address: </span>{" "}
                 {room.address}
               </li>
             </ul>
