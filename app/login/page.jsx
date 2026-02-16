@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import createSession from "../actions/createSession";
-// import { useFormState } from "react-dom";
 import { useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
@@ -31,7 +30,10 @@ function LoginPage() {
           </h2>
 
           <div className="mb-4">
-            <label htmlFor="email" className="mb-2 block font-bold text-zinc-200">
+            <label
+              htmlFor="email"
+              className="mb-2 block font-bold text-zinc-200"
+            >
               Email
             </label>
             <input
@@ -69,7 +71,10 @@ function LoginPage() {
 
             <p className="text-zinc-300">
               No account?
-              <Link href="/register" className="text-blue-400 hover:text-blue-300">
+              <Link
+                href="/register"
+                className="text-blue-400 hover:text-blue-300"
+              >
                 Register
               </Link>
             </p>

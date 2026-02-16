@@ -1,10 +1,26 @@
-import React from "react";
+"use client";
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect } from "react";
+import { toast } from "react-toastify";
+import bookRoom from "@/app/actions/bookRoom";
 
-function BookingForm() {
+function BookingForm({ roomId }) {
+  const [state, formAction] = useActionState(bookRoom, {});
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.error) toast.error(state.error);
+    if (state.success) {
+      toast.success("Room has been booked!");
+      router.push("/bookings");
+    }
+  }, [state, router]);
+
   return (
     <div className="mt-6">
       <h2 className="text-xl font-bold text-zinc-100">Book this Room</h2>
-      <form className="mt-4">
+      <form action={formAction} className="mt-4">
+        <input type="hidden" name="room_id" value={roomId} />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label
@@ -71,7 +87,7 @@ function BookingForm() {
         <div className="mt-6">
           <button
             type="submit"
-            className="flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-zinc-900"
+            className="flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-zinc-900 "
           >
             Book Room
           </button>

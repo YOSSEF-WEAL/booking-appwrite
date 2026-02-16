@@ -70,7 +70,7 @@ export default async function RoomPage({ params }) {
           </div>
         </div>
 
-        <BookingForm />
+        <BookingForm roomId={room.$id} />
       </div>
     </>
   );
