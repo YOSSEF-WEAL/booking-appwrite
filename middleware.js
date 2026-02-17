@@ -12,5 +12,5 @@ export default async function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/bookings", "/room/add", "/rooms/my"],
+  matcher: ["/bookings", "/rooms/add", "/rooms/my"],
 };

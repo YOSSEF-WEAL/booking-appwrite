@@ -1,7 +1,6 @@
 "use server";
 
 import { createAdminClient } from "@/config/appwrite";
-import { redirect } from "next/navigation";
 
 export default async function getSingleRoom(id) {
   try {
@@ -17,7 +16,6 @@ export default async function getSingleRoom(id) {
     return rooms;
   } catch (error) {
     console.error("Faild to get room", error);
-    redirect("/erorr");
-    return [];
+    return null;
   }
 }

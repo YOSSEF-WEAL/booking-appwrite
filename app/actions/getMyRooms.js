@@ -32,6 +32,6 @@ export default async function getMyRooms() {
     return rooms;
   } catch (error) {
     console.error("Faild to get rooms", error);
-    redirect("/erorr");
+    redirect("/login");
   }
 }
