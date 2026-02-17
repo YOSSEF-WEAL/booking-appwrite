@@ -1,23 +1,13 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import RoomImage from "./RoomImage";
 
 function RoomCard({ room }) {
-  const bucketId = process.env.NEXT_PUBLIC_APPWRITE_ROOMS_STORAGE_BUCKET;
-  const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT;
-
-  const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/${bucketId}/files/${room.image}/view?project=${projectId}`;
-
-  const imageSrc = room.image ? imageUrl : "/no-image.jpg";
-
   return (
     <div className="mt-4 flex flex-col justify-between rounded-lg border border-zinc-800 bg-zinc-900 p-4 shadow sm:flex-row sm:items-center">
       <div className="flex flex-col sm:flex-row sm:space-x-4">
-        <Image
-          src={imageSrc}
-          width={400}
-          height={100}
-          alt={room.name}
+        <RoomImage
+          room={room}
           className="w-full sm:w-32 sm:h-32 mb-3 sm:mb-0 object-cover rounded-lg"
         />
         <div className="space-y-1">

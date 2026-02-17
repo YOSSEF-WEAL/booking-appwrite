@@ -4,7 +4,6 @@ import MyRoomCard from "@/components/MyRoomCard";
 
 export default async function MyRoomsPage() {
   const rooms = await getMyRooms();
-  console.log("🚀 ~ MyRoomsPage ~ rooms:", rooms);
   return (
     <>
       <Heading title={"My Rooms"} />
