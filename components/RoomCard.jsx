@@ -4,11 +4,11 @@ import RoomImage from "./RoomImage";
 
 function RoomCard({ room }) {
   return (
-    <div className="mt-4 flex flex-col justify-between rounded-lg border border-zinc-800 bg-zinc-900 p-4 shadow sm:flex-row sm:items-center">
-      <div className="flex flex-col sm:flex-row sm:space-x-4">
+    <div className="flex flex-col justify-between gap-4 rounded-lg border border-zinc-800 bg-zinc-900 p-4 shadow sm:flex-row sm:items-center">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:space-x-4">
         <RoomImage
           room={room}
-          className="w-full sm:w-32 sm:h-32 mb-3 sm:mb-0 object-cover rounded-lg"
+          className="h-40 w-full rounded-lg object-cover sm:h-24 sm:w-32"
         />
         <div className="space-y-1">
           <h4 className="text-lg font-semibold text-zinc-100">{room.name}</h4>
@@ -27,10 +27,10 @@ function RoomCard({ room }) {
           </p>
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row w-full sm:w-auto sm:space-x-2 mt-2 sm:mt-0">
+      <div className="flex w-full flex-col sm:w-auto sm:flex-row sm:space-x-2">
         <Link
           href={`/rooms/${room.$id}`}
-          className="bg-blue-500 text-white px-4 py-2 rounded mb-2 sm:mb-0 w-full sm:w-auto text-center hover:bg-blue-700"
+          className="w-full rounded bg-blue-500 px-4 py-2 text-center text-white hover:bg-blue-700 sm:w-auto"
         >
           View Room
         </Link>

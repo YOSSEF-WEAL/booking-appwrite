@@ -8,7 +8,11 @@ export default async function MyRoomsPage() {
     <>
       <Heading title={"My Rooms"} />
       {rooms.length > 0 ? (
-        rooms.map((room) => <MyRoomCard key={room.$id} room={room} />)
+        <div className="mt-4 space-y-4">
+          {rooms.map((room) => (
+            <MyRoomCard key={room.$id} room={room} />
+          ))}
+        </div>
       ) : (
         <p className="text-zinc-400">You have no room listings</p>
       )}

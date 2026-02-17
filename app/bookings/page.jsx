@@ -6,15 +6,17 @@ async function BookingsPage() {
 
   return (
     <>
-      <Heading title="Bookings" />
+      <Heading title="My Bookings" />
       {bookings.length === 0 ? (
         <>
           <p className="text-zinc-400">You have no bookings</p>
         </>
       ) : (
-        bookings.map((booking) => (
-          <BookedRoomCard key={booking.$id} booking={booking} />
-        ))
+        <div className="mt-4 space-y-4">
+          {bookings.map((booking) => (
+            <BookedRoomCard key={booking.$id} booking={booking} />
+          ))}
+        </div>
       )}
     </>
   );

@@ -6,9 +6,11 @@ import BookingForm from "@/components/BookingForm";
 import Link from "next/link";
 import { FaChevronLeft } from "react-icons/fa";
 import RoomImage from "@/components/RoomImage";
+import checkAuth from "@/app/actions/checkAuth";
 
 export default async function RoomPage({ params }) {
   const { id } = await params;
+  const { isAuthenticated } = await checkAuth();
 
   const room = await getSingleRoom(id);
 
@@ -35,9 +37,13 @@ export default async function RoomPage({ params }) {
           />
 
           <div className="mt-4 sm:mt-0 sm:flex-1">
-            <p className="mb-4 text-zinc-400">{room.description}</p>
-
             <ul className="space-y-2">
+              <li>
+                <span className="font-semibold text-zinc-200">
+                  Description:{" "}
+                </span>{" "}
+                {room.description}
+              </li>
               <li>
                 <span className="font-semibold text-zinc-200">Size: </span>{" "}
                 {room.sqft}
@@ -60,7 +66,32 @@ export default async function RoomPage({ params }) {
           </div>
         </div>
 
-        <BookingForm roomId={room.$id} />
+        {isAuthenticated ? (
+          <BookingForm roomId={room.$id} />
+        ) : (
+          <div className="flex flex-col justify-center items-center gap-2 mt-6 rounded-lg border border-zinc-800 bg-zinc-950 p-5">
+            <h3 className="text-lg font-semibold text-zinc-100">
+              Login Required
+            </h3>
+            <p className="mt-2 text-sm text-zinc-400">
+              You need to login first to book this room.
+            </p>
+            <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center">
+              <Link
+                href="/login"
+                className="w-full rounded bg-blue-500 px-4 py-2 text-center text-white hover:bg-blue-700 sm:w-auto"
+              >
+                Login
+              </Link>
+              <Link
+                href="/register"
+                className="w-full rounded border border-zinc-700 px-4 py-2 text-center text-zinc-100 hover:bg-zinc-800 sm:w-auto"
+              >
+                Create Account
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

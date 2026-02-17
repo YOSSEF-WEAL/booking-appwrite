@@ -10,7 +10,7 @@ function DeleteRoomButton({ roomId }) {
     );
     if (confirmd) {
       try {
-        const response = await deleteRoom(roomId);
+        await deleteRoom(roomId);
         toast.success("Room deleted successfully!");
       } catch (error) {
         console.log("Failed to delete room", error);
@@ -22,7 +22,7 @@ function DeleteRoomButton({ roomId }) {
   return (
     <button
       onClick={handleDelete}
-      className="bg-red-500 text-white px-4 py-2 rounded mb-2 sm:mb-0 w-full sm:w-auto text-center hover:bg-red-700 flex gap-2 items-center cursor-pointer"
+      className="flex w-full cursor-pointer items-center justify-center gap-2 rounded bg-red-500 px-4 py-2 text-center text-white hover:bg-red-700 sm:w-auto"
     >
       <FaTrash /> Delete
     </button>
