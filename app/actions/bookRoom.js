@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import { ID } from "node-appwrite";
 import { revalidatePath } from "next/cache";
 import checkAuth from "./checkAuth";
+import checkRoomAvailability from "./checkRoomAvailability";
 
 export default async function bookRoom(previousState, formData) {
   const cookieStore = await cookies();
@@ -35,6 +36,8 @@ export default async function bookRoom(previousState, formData) {
     // Combine date and time to ISO 8601 format
     const checkInDateTime = `${checkInDate}T${checkInTime}`;
     const checkOutDateTime = `${checkOutDate}T${checkOutTime}`;
+
+    // Chack id room is available
 
     const bookingData = {
       // Appwrite collection schema uses these legacy attribute names.
